@@ -1,0 +1,7 @@
+{
+    "license": "MIT",
+    "require": {
+        "erusev/parsedown": "^1.7",
+        "twig/twig": "^3.8"
+    }
+}
