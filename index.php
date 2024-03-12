@@ -19,6 +19,7 @@ function parseMetadata($path) {
 
 function parseArticle($path) {
     $Parsedown = new Parsedown();
+    $Parsedown->setBreaksEnabled(true);
 
     $folder = basename($path);
 

@@ -8,6 +8,7 @@ html {
 
 .article-preview {
     height: 100px;
+    width: 500px;
 }
 
 .article-preview:hover {

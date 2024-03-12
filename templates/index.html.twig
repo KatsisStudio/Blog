@@ -2,12 +2,14 @@
 
 {% block content %}
     {% for article in articles %}
-    <a href="?article={{ article.id }}">
+    <div class="flex">
         <div class="article-preview flex">
-            <div>
-                {{ article.metadata.name }}
-            </div>
+            <a href="?article={{ article.id }}">
+                <div class="flex">
+                    {{ article.metadata.name }}
+                </div>
+            </a>
         </div>
-    </a>
+    </div>
     {% endfor %}
 {% endblock %}
