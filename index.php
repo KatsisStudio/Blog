@@ -8,11 +8,11 @@ use Twig\Environment;
 $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
-$files = array_slice(scandir("articles"), 2);
+$files = glob("articles/*", GLOB_ONLYDIR);
 
 echo $twig->render("index.html.twig", [
     "articles" => array_map(function($path) {
         $Parsedown = new Parsedown();
-        return $Parsedown->text(file_get_contents("articles/" . $path));
+        return $Parsedown->text(file_get_contents($path . "/article.md"));
     }, $files),
 ]);
