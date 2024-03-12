@@ -4,10 +4,17 @@
         <title>Katsis</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
+        {% if metadata is null %}
         <meta property="og:title" content="Katsis Blog"/>
         <meta property="og:image" content="https://katsis.net/img/logo.png">
         <meta property="og:description" content="Articles written by Katsis members"/>
         <meta name="description" content="Articles written by Katsis members">
+        {% else %}
+        <meta property="og:title" content="{{ metadata.metadata.name }}"/>
+        <meta property="og:image" content="https://blog.katsis.net/{{ metadata.metadata.preview }}">
+        <meta property="og:description" content="{{ metadata.metadata.description }}"/>
+        <meta name="description" content="{{ metadata.metadata.description }}">
+        {% endif %}
         <meta name="theme-color" content="#ff7f7f">
 
         <link rel="stylesheet" type="text/css" href="css/index.css"/>
