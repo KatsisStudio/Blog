@@ -13,6 +13,14 @@ $files = glob("articles/*", GLOB_ONLYDIR);
 echo $twig->render("index.html.twig", [
     "articles" => array_map(function($path) {
         $Parsedown = new Parsedown();
-        return $Parsedown->text(file_get_contents($path . "/article.md"));
+
+        $folder = basename($path);
+
+        $text = file_get_contents($path . "/article.md");
+        $expr = "/!\[([^\]]+)\]\(([^\)]+)\)/";
+        $repl = "![$1](articles/$folder/$2)";
+        $text = preg_replace($expr, $repl, $text);
+
+        return $Parsedown->text($text);
     }, $files),
 ]);
