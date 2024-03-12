@@ -9,6 +9,7 @@ $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
 $files = glob("articles/*", GLOB_ONLYDIR);
+array_pop($files);
 
 function parseMetadata($path) {
     $id = basename($path);
