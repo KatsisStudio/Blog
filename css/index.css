@@ -6,6 +6,10 @@ html {
     text-align: center;
 }
 
+body {
+    margin: 0;
+}
+
 .article-preview {
     height: 100px;
     width: 500px;
@@ -24,4 +28,14 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#banner {
+    background-color: #383838;
+    text-align: left;
+    padding-left: 20px;
+}
+
+img {
+    max-width: 100%;
 }
