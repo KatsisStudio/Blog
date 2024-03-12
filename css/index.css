@@ -5,3 +5,22 @@ html {
     line-height: 1.5em;
     text-align: center;
 }
+
+.article-preview {
+    height: 100px;
+}
+
+.article-preview:hover {
+    background-color: #383838;
+}
+
+a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

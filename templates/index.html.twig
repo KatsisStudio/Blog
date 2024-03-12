@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Blog Posts</h1>
-    <div>
-        {% for article in articles %}
-            {{ article | raw }}
-            <hr>
-        {% endfor %}
-    </div>
+    {% for article in articles %}
+    <a href="?article={{ article.id }}">
+        <div class="article-preview flex">
+            <div>
+                {{ article.metadata.name }}
+            </div>
+        </div>
+    </a>
+    {% endfor %}
 {% endblock %}

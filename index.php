@@ -10,17 +10,32 @@ $twig = new Environment($loader);
 
 $files = glob("articles/*", GLOB_ONLYDIR);
 
-echo $twig->render("index.html.twig", [
-    "articles" => array_map(function($path) {
-        $Parsedown = new Parsedown();
+function parseMetadata($path) {
+    return [
+        "id" => basename($path),
+        "metadata" => json_decode(file_get_contents("$path/info.json"), true)
+    ];
+}
 
-        $folder = basename($path);
+function parseArticle($path) {
+    $Parsedown = new Parsedown();
 
-        $text = file_get_contents($path . "/article.md");
-        $expr = "/!\[([^\]]+)\]\(([^\)]+)\)/";
-        $repl = "![$1](articles/$folder/$2)";
-        $text = preg_replace($expr, $repl, $text);
+    $folder = basename($path);
 
-        return $Parsedown->text($text);
-    }, $files),
-]);
+    $text = file_get_contents($path . "/article.md");
+    $expr = "/!\[([^\]]+)\]\(([^\)]+)\)/";
+    $repl = "![$1](articles/$folder/$2)";
+    $text = preg_replace($expr, $repl, $text);
+
+    return $Parsedown->text($text);
+}
+
+if (isset($_GET["article"]) && in_array("articles/" . $_GET["article"], $files)) {
+    echo $twig->render("article.html.twig", [
+        "article" => parseArticle("articles/" . $_GET["article"]),
+    ]);
+} else {
+    echo $twig->render("index.html.twig", [
+        "articles" => array_map("parseMetadata", $files),
+    ]);
+}
