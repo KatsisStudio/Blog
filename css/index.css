@@ -18,7 +18,7 @@ body {
     background-color: #383838;
 }
 
-a {
+.article-menu a {
     color: #ccc;
     text-decoration: none;
 }
