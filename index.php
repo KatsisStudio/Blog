@@ -5,6 +5,30 @@ require_once "vendor/autoload.php";
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
+class ParsedownExtension extends Parsedown
+{
+    // From https://github.com/adjmpwgt/parsedown-extra-plus/blob/main/ParsedownExtraPlus.php
+    public $blockCodeClassFormat = 'language-%s';
+
+    public $blockPreClassHighlight = 'prettyprint';
+
+    protected function blockFencedCode($Line)
+    {
+        $Block = parent::blockFencedCode($Line);
+
+        if (isset($Block['element']['name']) && $Block['element']['name'] == 'pre' && isset($Block['element']['text']['name']) && $Block['element']['text']['name'] == 'code') {
+            if (isset($Block['element']['text']['attributes']['class'])) {
+                if (strpos($Block['element']['text']['attributes']['class'], 'mermaid') === false) {
+                    $Block['element']['attributes']['class'] = $this->blockPreClassHighlight;
+                } else {
+                    $Block['element']['text']['attributes']['class'] = str_replace(sprintf($this->blockCodeClassFormat, 'mermaid'), 'mermaid', $Block['element']['text']['attributes']['class']);
+                }
+            }
+        }
+        return $Block;
+    }
+}
+
 $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
@@ -23,7 +47,7 @@ function parseMetadata($path) {
 }
 
 function parseArticle($path) {
-    $Parsedown = new Parsedown();
+    $Parsedown = new ParsedownExtension();
     $Parsedown->setBreaksEnabled(true);
 
     $folder = basename($path);
