@@ -15,9 +15,17 @@ body {
     justify-content: center;
 }
 
+.article-img-container {
+    width: 100px;
+    height: 100%;
+    margin-right: 25px;
+}
+
 .article-preview {
     height: 100px;
     width: 2000px;
+    text-align: left;
+    justify-content: left;
 }
 
 @media (max-width: 2000px) {
@@ -28,6 +36,10 @@ body {
 
 .article-preview:hover {
     background-color: #383838;
+}
+
+.article-menu img {
+    max-height: 100%;
 }
 
 .article-menu {
