@@ -9,6 +9,12 @@ body {
     margin: 0;
 }
 
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .article-preview {
     height: 100px;
     width: 500px;
@@ -18,16 +24,20 @@ body {
     background-color: #383838;
 }
 
-.article-menu a {
+.article-menu a, #banner a {
     color: #ccc;
     text-decoration: none;
 }
 
-.flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.article-menu a:hover, #banner a:hover {
+    color: pink;
 }
+
+#banner {
+    height: 50px;
+    justify-content: left;
+}
+
 
 #banner {
     background-color: #383838;
@@ -46,6 +56,14 @@ img {
 #article {
     margin-left: 10em;
     margin-right: 10em;
+}
+
+#article a {
+    color: pink;
+}
+
+#article a:hover {
+    color: #ff94a6;
 }
 
 @media (max-width: 1000px) {
