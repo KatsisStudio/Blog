@@ -3,7 +3,6 @@ html {
     background-color: #1e1e1e;
     color: #ccc;
     line-height: 1.5em;
-    text-align: center;
 }
 
 body {
@@ -38,4 +37,20 @@ a {
 
 img {
     max-width: 100%;
+}
+
+.center {
+    text-align: center;
+}
+
+#article {
+    margin-left: 10em;
+    margin-right: 10em;
+}
+
+@media (max-width: 1000px) {
+    #article {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
