@@ -17,11 +17,21 @@ body {
 
 .article-preview {
     height: 100px;
-    width: 500px;
+    width: 2000px;
+}
+
+@media (max-width: 2000px) {
+    .article-preview {
+        width: 100vw;
+    }
 }
 
 .article-preview:hover {
     background-color: #383838;
+}
+
+.article-menu {
+    margin-top: 50px;
 }
 
 .article-menu a, #banner a {
