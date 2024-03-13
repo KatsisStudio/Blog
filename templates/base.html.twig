@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Katsis</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         {% if metadata is null %}
+        <title>Katsis Blog</title>
         <meta property="og:title" content="Katsis Blog"/>
         <meta property="og:image" content="https://katsis.net/img/logo.png">
         <meta property="og:description" content="Articles written by Katsis members"/>
         <meta name="description" content="Articles written by Katsis members">
         {% else %}
+        <title>{{ metadata.metadata.name }}</title>
         <meta property="og:title" content="{{ metadata.metadata.name }}"/>
         <meta property="og:image" content="https://blog.katsis.net/{{ metadata.metadata.preview }}">
         <meta property="og:description" content="{{ metadata.metadata.description }}"/>
