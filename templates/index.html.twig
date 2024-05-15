@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+    <a href="https://katsis.net" id="back-to-main">
+        <img src="img/logo.svg"/>
+    </a>
     {% for article in articles %}
     <div class="flex center article-menu">
         <a href="?article={{ article.id }}">
