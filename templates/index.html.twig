@@ -6,7 +6,7 @@
     </a>
     {% for article in articles %}
     <div class="flex center article-menu">
-        <a href="?article={{ article.id }}">
+        <a href="/{{ article.id }}">
             <div class="article-preview flex">
                 <div class="article-img-container flex">
                     <img src="{{ article.metadata.preview }}" alt="Article preview"/>

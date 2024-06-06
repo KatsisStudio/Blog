@@ -29,11 +29,13 @@ class ParsedownExtension extends Parsedown
     }
 }
 
-$loader = new FilesystemLoader(["templates"]);
-$twig = new Environment($loader);
+function cleanName($path) {
+    return trimZeros(basename($path));
+}
 
-$files = glob("articles/*", GLOB_ONLYDIR);
-array_pop($files);
+function trimZeros($name) {
+    return ltrim($name, '0');
+}
 
 function parseMetadata($path) {
     $id = basename($path);
@@ -41,7 +43,7 @@ function parseMetadata($path) {
     $metadata["preview"] = "articles/" . $id . "/" . $metadata["preview"];
 
     return [
-        "id" => basename($path),
+        "id" => trimZeros($id),
         "metadata" => $metadata
     ];
 }
@@ -60,13 +62,26 @@ function parseArticle($path) {
     return $Parsedown->text($text);
 }
 
-if (isset($_GET["article"]) && in_array("articles/" . $_GET["article"], $files)) {
-    echo $twig->render("article.html.twig", [
-        "article" => parseArticle("articles/" . $_GET["article"]),
-        "metadata" => parseMetadata("articles/" . $_GET["article"])
-    ]);
-} else {
-    echo $twig->render("index.html.twig", [
-        "articles" => array_map("parseMetadata", $files),
-    ]);
+$loader = new FilesystemLoader(["templates"]);
+$twig = new Environment($loader);
+
+$urlData = array_filter(explode("/", substr($_SERVER["REQUEST_URI"], 1)));
+$article = count($urlData) > 0 ? $urlData[0] : null;
+
+$files = glob("articles/*", GLOB_ONLYDIR);
+array_pop($files);
+
+foreach ($files as $f) {
+    if ($article == cleanName($f)) {
+        $result = $value;
+        echo $twig->render("article.html.twig", [
+            "article" => parseArticle($f),
+            "metadata" => parseMetadata($f)
+        ]);
+        return;
+    }
 }
+
+echo $twig->render("index.html.twig", [
+    "articles" => array_map("parseMetadata", $files),
+]);
