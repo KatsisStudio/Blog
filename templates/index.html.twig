@@ -2,14 +2,14 @@
 
 {% block content %}
     <a href="https://katsis.net" id="back-to-main">
-        <img src="img/logo.svg"/>
+        <img src="/img/logo.svg"/>
     </a>
     {% for article in articles %}
     <div class="flex center article-menu">
         <a href="/{{ article.id }}">
             <div class="article-preview flex">
                 <div class="article-img-container flex">
-                    <img src="{{ article.metadata.preview }}" alt="Article preview"/>
+                    <img src="/{{ article.metadata.preview }}" alt="Article preview"/>
                 </div>
                 <div>
                     <h2>{{ article.metadata.name }}</h2>
