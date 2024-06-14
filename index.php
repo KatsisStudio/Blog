@@ -65,7 +65,7 @@ function parseArticle($path) {
 $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
-$urlData = array_filter(explode("/", substr($_SERVER["REQUEST_URI"], 1)));
+$urlData = array_filter(explode("/", substr(explode("?", $_SERVER["REQUEST_URI"])[0], 1)));
 $article = count($urlData) > 0 ? $urlData[0] : null;
 
 $files = glob("articles/*", GLOB_ONLYDIR);
